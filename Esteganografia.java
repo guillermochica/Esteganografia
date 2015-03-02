@@ -8,6 +8,7 @@ package esteganografia;
  *
  * @author guillermo
  */
+
 public class Esteganografia {
     
     static final String caracteres = 
@@ -119,20 +120,5 @@ public class Esteganografia {
   	return texto;
         
     }
-    
-    
-    public static void main(String[] args) {
-        
-        //Cargar una imagen
-//        ImageRGB img = new ImageRGB("f.bmp");
-        //Esconder texto en imagen
-//        String texto = "No me gusta que a los toros";
-//        escondeTexto(img, texto);
-        //Muestra texto escondido
-//        System.out.println(extraeTexto(img));
-        //Guarda la imagen con el texto
-//        img.guardaBitMap("f.bmp");
-        
-    }
-    
+
 }

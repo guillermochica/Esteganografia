@@ -8,6 +8,7 @@ package esteganografia;
 //import static esteganografia.Esteganografia;
 
 import static esteganografia.Esteganografia.extraeTexto;
+import java.io.File;
 
 //import static esteganografia.Esteganografia.extraeTexto;
 
@@ -33,20 +34,25 @@ public class VentanaEsteganografia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CampoPathImagen = new javax.swing.JTextField();
+        jFrame1 = new javax.swing.JFrame();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         CampoTexto = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
+        Archivo = new javax.swing.JFileChooser();
+
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        CampoPathImagen.setText("/home/guillermo/Imágenes/");
-        CampoPathImagen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoPathImagenActionPerformed(evt);
-            }
-        });
 
         jButton1.setText("Mostrar texto");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,34 +72,42 @@ public class VentanaEsteganografia extends javax.swing.JFrame {
             }
         });
 
+        Archivo.setCurrentDirectory(new java.io.File("/home/guillermo/Imágenes"));
+        Archivo.setDialogTitle("Esteganografía");
+        Archivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ArchivoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Archivo, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(CampoPathImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
-                        .addGap(0, 165, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoPathImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addComponent(Archivo, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -101,21 +115,19 @@ public class VentanaEsteganografia extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String path = CampoPathImagen.getText();
+        File file = Archivo.getSelectedFile();
+        String path = file.getAbsolutePath();
         ImageRGB img = new ImageRGB(path);
         String texto = extraeTexto(img);
         CampoTexto.setText(texto);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void CampoPathImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoPathImagenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CampoPathImagenActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        String path2 = CampoPathImagen.getText();
+        File file2 = Archivo.getSelectedFile();
+        String path2 = file2.getAbsolutePath();
         ImageRGB img2 = new ImageRGB(path2);
         String textoEsconder = CampoTexto.getText();
         Esteganografia.escondeTexto(img2, textoEsconder);
@@ -124,6 +136,10 @@ public class VentanaEsteganografia extends javax.swing.JFrame {
         CampoTexto.setText("Texto escondido");
     
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ArchivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ArchivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,10 +175,11 @@ public class VentanaEsteganografia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField CampoPathImagen;
+    private javax.swing.JFileChooser Archivo;
     private javax.swing.JTextArea CampoTexto;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
